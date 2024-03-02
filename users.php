@@ -65,58 +65,42 @@ include 'header.php';
               <!-- End Disabled Backdrop Modal-->
             </div>
 
-        <div class="card">
-      
-              <!-- Table with stripped rows -->
-              <table class="table datatable">
-                <thead>
-                  <tr>
-                    <th scope="col">S/N</th>
-                    <th scope="col">Full Name</th>
-                    <th scope="col">Image</th>
-                    <th scope="col">Email</th>
-                    <th scope="col">Contact</th>
-                    <th scope="col">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                 
-                  <tr>
-                    <th scope="row">1</th>
-                    <td>Hellen</td>
-                    <td>
-                      <img src="assets/img/car1.avif" alt="" class="img-fluid" style="max-width: 50px;">
-                    </td>
-                    <td>hellen@gmail.com</td>
-                    <td>08012345678</td>
-                    <td>
-                      <a class='btn btn-primary' href='edit?id=" . $rows["id"] . "'>Edit</a>
-                      <a class='btn btn-danger' href='delete?id=" . $rows["id"] . "'>Delete</a>
-                    </td>
-                  </tr>
-
-                  <tr>
-                    <th scope="row">2</th>
-                    <td>John</td>
-                    <td>
-                      <img src="assets/img/car1.avif" alt="" class="img-fluid" style="max-width: 50px;">
-                    </td>
-                    <td>john@gmail.com</td>
-                    <td>0896423121</td>
-                    <td>
-                      <a class='btn btn-primary' href='edit?id=" . $rows["id"] . "'>Edit</a>
-                      <a class='btn btn-danger' href='delete?id=" . $rows["id"] . "'>Delete</a>
-                    </td>
-                  </tr>
-                 
-                  </tbody>
-              </table>
-              <!-- End Table with stripped rows -->
-
-            </div>
-          </div>
-
-        </div>
+            <div class="card-body">
+                    <table id="example1" class="table table-bordered table-striped">
+                      <!-- `user_id`, `fname`, `email`, `contact`, `password`, `image`, `date_registered`, `role` -->
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Contact</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        <?php
+                          $sql = "SELECT * FROM users";
+                          $result = $conn->query($sql);
+                          if ($result->num_rows > 0) {  
+                            while ($row = $result->fetch(PDO::FETCH_OBJ)) {
+                                ?>
+                                <tr>
+                                    <td><?=$row->user_id;?></td>
+                                    <td><?php echo $row['fname'] ?></td>
+                                    <td><?php echo $row['email'] ?></td>
+                                    <td><?php echo $row['contact'] ?></td>
+                                    <td>
+                                    <a class="btn btn-primary" href="edit.php?id=<?php echo $row['id']; ?>" role="button">edit</a>
+                                    <a class="btn btn-danger" href="delete.php?id=<?php echo $row['id']; ?>" role="button">delete</a>
+                                    </td>
+                                </tr>
+                                <?php
+                            }
+                        }
+                        ?>
+                    </tbody>
+                    </table>
+                </div>
       </div>
     </section>
 <?php include 'footer.php'; ?>

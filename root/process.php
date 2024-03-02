@@ -51,8 +51,8 @@ if (isset($_POST['loginbtn'])) {
 	  if(!$check){
 	  	// $reset_password = $password; 
 		$password = sha1($password);
-	    $jovia = "INSERT INTO users VALUES(NULL,'$fname','$email','$contact','$password','$image','$today','$role')";
-	    $result = dbCreate($jovia);
+	    $sql = "INSERT INTO users VALUES(NULL,'$fname','$email','$contact','$password','$image','$today','$role')";
+	    $result = dbCreate($sql);
 	    if($result == 1){
 	    	echo "<script>
 	          	alert('Registration is Successful');
